@@ -1,0 +1,23 @@
+{
+  "name": "domoawslambda",
+  "version": "1.0.0",
+  "description": "",
+  "main": "teamsWriteback.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ellibot88/domoAWSLambda.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ellibot88/domoAWSLambda/issues"
+  },
+  "homepage": "https://github.com/ellibot88/domoAWSLambda#readme",
+  "dependencies": {
+    "axios": "^0.27.2"
+  }
+}
