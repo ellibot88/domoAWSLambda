@@ -25,8 +25,7 @@ var config = {
   method: "post",
   url: "https://api.sendgrid.com/v3/mail/send",
   headers: {
-    Authorization:
-      "Bearer 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",
+    Authorization: "Bearer test",
     "Content-Type": "application/json",
   },
   data: data,
