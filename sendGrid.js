@@ -39,39 +39,41 @@ axios
         configuration
       )
       .then((axiosRes) => {
-        console.log(axiosRes.data.rows);
-
-        var data = JSON.stringify({
-          personalizations: [
-            {
-              to: [
-                {
-                  email: "egleonard88@gmail.com",
-                },
-              ],
+        let domoData = axiosRes.data.rows;
+        domoData.forEach((element) => {
+          var data = JSON.stringify({
+            personalizations: [
+              {
+                to: [
+                  {
+                    email: "egleonard88@gmail.com",
+                  },
+                ],
+              },
+            ],
+            from: {
+              email: "elliott@hack-a-thon.com",
             },
-          ],
-          from: {
-            email: "elliott@hack-a-thon.com",
-          },
-          subject: "Domo Test integration with Sendgrid",
-          content: [
-            {
-              type: "text/plain",
-              value: "DOMO DOMO DOMO",
-            },
-          ],
+            subject: "Domo Test integration with Sendgrid",
+            content: [
+              {
+                type: "text/plain",
+                value: "DOMO DOMO DOMO",
+              },
+            ],
+          });
+          axios
+            .post("https://api.sendgrid.com/v3/mail/send", data, {
+              headers: {
+                Authorization: `Bearer ${sendgrid_api_key}`,
+                "Content-Type": "application/json",
+              },
+            })
+            .then((sendgridRes) => console.log(sendgridRes.data))
+            .catch((sendgridErr) => console.log(sendgridErr.data));
         });
-        axios
-          .post("https://api.sendgrid.com/v3/mail/send", data, {
-            headers: {
-              Authorization: `Bearer ${sendgrid_api_key}`,
-              "Content-Type": "application/json",
-            },
-          })
-          .then((sendgridRes) => console.log(sendgridRes.data))
-          .catch((sendgridErr) => console.log(sendgridErr.data));
       })
+
       .catch((axiosErr) => console.log(axiosErr));
   })
   .catch((err) => console.log(err));
