@@ -5,6 +5,7 @@ require("dotenv").config();
 const { domo_client_id } = process.env;
 const { domo_client_secret } = process.env;
 const { sendgrid_api_key } = process.env;
+const { domo_dataset } = process.env;
 
 console.log(sendgrid_api_key);
 
@@ -34,19 +35,19 @@ axios
     };
     axios
       .post(
-        `https://api.domo.com/v1/datasets/query/execute/6c381347-9460-42cf-88de-835eae24b64a`,
+        `https://api.domo.com/v1/datasets/query/execute/${domo_dataset}`,
         data,
         configuration
       )
       .then((axiosRes) => {
         let domoData = axiosRes.data.rows;
-        domoData.forEach((element) => {
+        domoData.forEach((element, index) => {
           var data = JSON.stringify({
             personalizations: [
               {
                 to: [
                   {
-                    email: "egleonard88@gmail.com",
+                    email: `${element[0]}`,
                   },
                 ],
               },
@@ -54,11 +55,11 @@ axios
             from: {
               email: "elliott@hack-a-thon.com",
             },
-            subject: "Domo Test integration with Sendgrid",
+            subject: `${index}`,
             content: [
               {
                 type: "text/plain",
-                value: "DOMO DOMO DOMO",
+                value: `${element[1]}`,
               },
             ],
           });
